@@ -28,16 +28,7 @@ class ConvertUtil {
         }
     }
 
-    fun convertLocalTimeToDate(
-        localDateTime: LocalDateTime,
-        zoneId: ZoneId = ZoneId.systemDefault(),
-        additionalDay: Int = 0,
-    ): Date {
-        val today = LocalDate.now().plusDays(additionalDay.toLong())
-        val dateTime = LocalDateTime.of(today, localDateTime.toLocalTime())
-        val instant = dateTime.atZone(zoneId).toInstant()
-        return Date.from(instant)
-    }
+
 
     fun loadJsonFromAsset(context: Context, fileName: String): String? {
         return try {

@@ -14,17 +14,17 @@ class VegetabianDayService {
         val LIST_VEGATABIAN_DAY_IN_MONTH_LACK  = listOf(1, 8, 14, 15, 18, 23, 24, 27, 28, 29)
     }
 
-    fun getLunarDayFromSunDayInMonth(solarDate: Date):Int {
-        return MyCalendarService(solarDate).myLunarDate.day
+    fun getLunarDayFromSunDayInMonth(solarLocalDateTime: LocalDateTime):Int {
+        return MyCalendarService(solarLocalDateTime).myLunarDate.day
     }
 
-    fun isFullLunarMonth(solarDate:Date):Boolean{
-        return MyCalendarService(solarDate).isCurrentLunarMonthFull()
+    fun isFullLunarMonth(solarLocalDateTime: LocalDateTime):Boolean{
+        return MyCalendarService(solarLocalDateTime).isCurrentLunarMonthFull()
     }
 
-    fun isVegetabianDay(solarDate: Date): Boolean {
-        val isFullMonth = isFullLunarMonth(solarDate)
-        val lunarDayInMonth = getLunarDayFromSunDayInMonth(solarDate)
+    fun isVegetabianDay(solarLocalDateTime: LocalDateTime): Boolean {
+        val isFullMonth = isFullLunarMonth(solarLocalDateTime)
+        val lunarDayInMonth = getLunarDayFromSunDayInMonth(solarLocalDateTime)
         if(isFullMonth){
             return LIST_VEGATABIAN_DAY_IN_MONTH_FULL.contains(lunarDayInMonth)
         }else{

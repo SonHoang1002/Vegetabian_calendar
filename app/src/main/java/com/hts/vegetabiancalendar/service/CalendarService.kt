@@ -1,21 +1,29 @@
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.hts.vegetabiancalendar.util.toDate
+import com.hts.vegetabiancalendar.util.toLocalDateTime
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
-
+@RequiresApi(Build.VERSION_CODES.O)
 class MyCalendarService {
-    private var solarDate: Date
+    private var solarDateTime: LocalDateTime
     private var solarCalendar: Calendar
     var myLunarDate: MyLunarDate
 
-    constructor(date: Date) {
-        solarDate = date
+
+    constructor(localDateTime: LocalDateTime) {
+        solarDateTime = localDateTime
         solarCalendar = Calendar.getInstance()
-        solarCalendar.setTime(date)
+        solarCalendar.setTime(localDateTime.toDate())
         myLunarDate = convertSolar2Lunar()
     }
 
     private fun convertSolar2Lunar(): MyLunarDate {
         val timeZone = 7
-        val dayNumber: Int = jdFromDate(solarDate)
+        val dayNumber: Int = jdFromDate(solarDateTime.toDate())
         val k = ((dayNumber - 2415021.076998695) / 29.530588853).toInt()
         var monthStart: Int = getNewMoonDay(k + 1, timeZone)
         if (monthStart > dayNumber) {
@@ -148,7 +156,7 @@ class MyCalendarService {
         return (L / Math.PI * 6).toInt()
     }
 
-    private fun getLeapMonthOffset(a11: Int, timeZone: Int): Int {
+    private fun getLeapMonthOffset(a11: Int, timeZone: Int =7): Int {
         val k = ((a11 - 2415021.076998695) / 29.530588853 + 0.5).toInt()
         var last = 0
         var i = 1 // We start with the month following lunar month 11
@@ -163,7 +171,7 @@ class MyCalendarService {
 
     fun isCurrentLunarMonthFull(): Boolean {
         val timeZone = 7
-        val dayNumber = jdFromDate(solarDate)
+        val dayNumber = jdFromDate(solarDateTime.toDate())
         val k = ((dayNumber - 2415021.076998695) / 29.530588853).toInt()
 
         val currentMonthStart = getNewMoonDay(k, timeZone)
@@ -176,12 +184,21 @@ class MyCalendarService {
 
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun MyLunarDate.isFullMonth(solarDate: Date): Boolean {
-    val calendarService = MyCalendarService(solarDate)
+    val calendarService = MyCalendarService(solarDate.toLocalDateTime())
     return calendarService.isCurrentLunarMonthFull()
 }
 
-
+@RequiresApi(Build.VERSION_CODES.O)
+fun MyLunarDate.toLocalDate(approxYear: Int = LocalDate.now().year): LocalDate {
+    return LocalDate.of(approxYear, month, day)
+}
+@RequiresApi(Build.VERSION_CODES.O)
+fun MyLunarDate.toDate(approxYear: Int = LocalDate.now().year, zoneId: ZoneId = ZoneId.systemDefault()): Date {
+    val localDate = this.toLocalDate(approxYear)
+    return Date.from(localDate.atStartOfDay(zoneId).toInstant())
+}
 class MyLunarDate {
     var day = 1
     var month = 1
@@ -220,3 +237,4 @@ class MyLunarDate {
         return result
     }
 }
+

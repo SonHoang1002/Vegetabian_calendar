@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.*
 import com.hts.vegetabiancalendar.view_model.MyViewModel
 
 @Composable
-fun SettingScreen(counter: String?, viewModel: MyViewModel) {
+fun SettingScreen(counter: String?, viewModel: MyViewModel, innerPadding: PaddingValues) {
     Box(
         modifier = Modifier
             .fillMaxSize()

@@ -1,9 +1,11 @@
 package com.hts.vegetabiancalendar
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
@@ -39,6 +41,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ScreenMain(innerPadding: PaddingValues, viewModel: MyViewModel) {
     val navController = rememberNavController()
@@ -46,18 +49,18 @@ fun ScreenMain(innerPadding: PaddingValues, viewModel: MyViewModel) {
         // Home
         composable(MyRoute.Home.route) {
             // pass the navController
-            HomeScreen(navController = navController, viewModel = viewModel)
+            HomeScreen(navController = navController, viewModel = viewModel,innerPadding = innerPadding)
         }
         // Profile
         composable(MyRoute.Profile.route) {
-            ProfileScreen(viewModel = viewModel)
+            ProfileScreen(viewModel = viewModel, innerPadding = innerPadding)
         }
         // Settings
         // "/{id}" - its the argument passed down from homeScreen
         composable(MyRoute.Settings.route + "/{id}") { navBackStack ->
             // Extracting the argument
             val counter = navBackStack.arguments?.getString("id")
-            SettingScreen(counter = counter, viewModel= viewModel)
+            SettingScreen(counter = counter, viewModel= viewModel,innerPadding = innerPadding)
         }
     }
 }
