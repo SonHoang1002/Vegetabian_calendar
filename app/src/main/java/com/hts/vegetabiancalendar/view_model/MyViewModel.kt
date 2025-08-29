@@ -9,7 +9,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hts.vegetabiancalendar.model.ModelChapterDhammapada
 import com.hts.vegetabiancalendar.model.ModelDhammapada
+import com.hts.vegetabiancalendar.model.ModelVerseDhammapada
 import com.hts.vegetabiancalendar.util.ConvertUtil
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -18,7 +20,6 @@ import java.time.LocalTime
 val TAG = "MyViewModelTAG"
 @RequiresApi(Build.VERSION_CODES.O)
 class MyViewModel(private val context: Context) : ViewModel() {
-
 
     private val _currentDayIndex = mutableStateOf(LocalDateTime.now())
     private val _currentVerseIndex = mutableIntStateOf(0)
@@ -37,6 +38,13 @@ class MyViewModel(private val context: Context) : ViewModel() {
         get() = dhammapadaData?.chapter?.size
     val numberVerseDhammapada: Int?
         get() = dhammapadaData?.chapter?.sumOf { it.verses.size }
+
+    fun getCurrentVerseValue(index:Int): ModelVerseDhammapada?{
+         return dhammapadaData?.getVerseByIndex(index)
+    }
+    fun getChapterByVerseIndex(index:Int): ModelChapterDhammapada?{
+        return dhammapadaData?.getChapterByVerseIndex(index)
+    }
 
     fun getDhammapadaData() {
         viewModelScope.launch {

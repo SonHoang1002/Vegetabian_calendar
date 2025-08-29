@@ -23,7 +23,7 @@ import com.hts.vegetabiancalendar.ui.screen.ProfileScreen
 import com.hts.vegetabiancalendar.ui.screen.SettingScreen
 import com.hts.vegetabiancalendar.ui.theme.VegetabianCalendarTheme
 import com.hts.vegetabiancalendar.view_model.MyViewModel
-
+@RequiresApi(Build.VERSION_CODES.O)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,7 +1,6 @@
 package com.hts.vegetabiancalendar.model
 
 import MyCalendarService
-import MyLunarDate
 import android.os.Build
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
@@ -9,9 +8,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
-data class EventDay(
+data class MyDay(
     val solarDateTime: LocalDateTime,
-    val event: String
 ) {
     fun getLunarDateTime(): MyLunarDate =
         MyCalendarService(solarDateTime).myLunarDate

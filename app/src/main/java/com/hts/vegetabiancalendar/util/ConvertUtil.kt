@@ -6,13 +6,8 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
 import com.hts.vegetabiancalendar.model.ModelDhammapada
-import com.hts.vegetabiancalendar.model.ModelVerseDhammapada
 import java.io.IOException
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.ZoneId
-import java.util.Date
+
 @RequiresApi(Build.VERSION_CODES.O)
 class ConvertUtil {
     fun convertToDayOfWeekValue(value :Int):String{
@@ -27,8 +22,6 @@ class ConvertUtil {
             else -> "Không phải ngày trong tuần"
         }
     }
-
-
 
     fun loadJsonFromAsset(context: Context, fileName: String): String? {
         return try {
