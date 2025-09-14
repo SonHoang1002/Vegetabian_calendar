@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
@@ -43,6 +45,7 @@ import androidx.navigation.NavHostController
 import com.hts.vegetabiancalendar.model.ModelVerseDhammapada
 import com.hts.vegetabiancalendar.model.MyLunarDate
 import com.hts.vegetabiancalendar.model.MyReason
+import com.hts.vegetabiancalendar.ui.components.BuildAppBar
 import com.hts.vegetabiancalendar.util.ConvertUtil
 import com.hts.vegetabiancalendar.util.getDescriptionsForText
 import com.hts.vegetabiancalendar.util.isVegetabianDayWithSolarLocalDateTime
@@ -77,6 +80,7 @@ fun HomeScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            BuildAppBar()
             Box(
                 modifier = Modifier
                     .weight(1f),
@@ -84,7 +88,6 @@ fun HomeScreen(
             ) {
                 BuildSolarDayOfWeek(viewModel, currentLocalDateTime)
             }
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -139,10 +142,18 @@ fun HomeScreen(
 fun BuildSolarDayOfWeek(viewModel: MyViewModel, currentLocalDateTime: LocalDateTime) {
     val currentSolarDayOfWeek =
         ConvertUtil().convertToDayOfWeekValue(currentLocalDateTime.dayOfWeek.value)
-    Text(
-        currentSolarDayOfWeek,
-        fontSize = 80.sp,
-        fontWeight = FontWeight.Bold,
+
+    BasicText(
+        text = currentSolarDayOfWeek,
+        autoSize = TextAutoSize.StepBased(
+            minFontSize = 10.sp,
+            maxFontSize = 60.sp,
+            stepSize = 5.sp,
+        ),
+        style = TextStyle(
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
+        )
     )
 }
 
@@ -182,7 +193,7 @@ fun BuildLunar(localDateTime: LocalDateTime, lunarStatusDayData: Pair<Boolean, M
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
 
-        )
+            )
     }
 }
 
@@ -250,7 +261,7 @@ fun BuildSampleDhammapadaItem(viewModel: MyViewModel) {
                         modifier = Modifier.fillMaxWidth(),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Normal,
-                        fontStyle = FontStyle.Italic
+                        fontStyle = FontStyle.Italic,
                     )
                 }
 
