@@ -17,9 +17,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters.addAll(listOf("x86", "x86_64", "arm64-v8a", "armeabi-v7a"))
+        }
         externalNativeBuild {
+            // For ndk-build, instead use the ndkBuild block.
             cmake {
-                cppFlags += ""
+                // Passes optional arguments to CMake.
+                arguments +"-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
             }
         }
     }
