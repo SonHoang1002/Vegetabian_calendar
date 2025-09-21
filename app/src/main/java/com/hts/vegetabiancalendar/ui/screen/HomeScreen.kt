@@ -22,7 +22,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -42,13 +41,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.hts.vegetabiancalendar.MainActivity
 import com.hts.vegetabiancalendar.model.ModelVerseDhammapada
 import com.hts.vegetabiancalendar.model.MyLunarDate
 import com.hts.vegetabiancalendar.model.MyReason
 import com.hts.vegetabiancalendar.ui.components.BuildAppBar
 import com.hts.vegetabiancalendar.util.ConvertUtil
+import com.hts.vegetabiancalendar.util.checkVegetabianDayWithSolarLocalDateTime
 import com.hts.vegetabiancalendar.util.getDescriptionsForText
-import com.hts.vegetabiancalendar.util.isVegetabianDayWithSolarLocalDateTime
 import com.hts.vegetabiancalendar.view_model.MyViewModel
 import java.time.LocalDateTime
 
@@ -59,14 +59,15 @@ var TAG = "HomeScreen"
 fun HomeScreen(
     navController: NavHostController,
     viewModel: MyViewModel,
-    innerPadding: PaddingValues
+    innerPadding: PaddingValues,
+    mainActivity: MainActivity
 ) {
     val currentLocalDateTime: LocalDateTime = viewModel.currentDay
     val localConfig = LocalConfiguration.current
     val screenWidthDp = localConfig.screenWidthDp
     Log.d(TAG, "HomeScreen: $screenWidthDp")
     val lunarStatusDayData = currentLocalDateTime
-        .isVegetabianDayWithSolarLocalDateTime()
+        .checkVegetabianDayWithSolarLocalDateTime()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -80,7 +81,7 @@ fun HomeScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BuildAppBar()
+            BuildAppBar(viewModel,mainActivity)
             Box(
                 modifier = Modifier
                     .weight(1f),
@@ -152,7 +153,8 @@ fun BuildSolarDayOfWeek(viewModel: MyViewModel, currentLocalDateTime: LocalDateT
         ),
         style = TextStyle(
             fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.tertiary,
         )
     )
 }

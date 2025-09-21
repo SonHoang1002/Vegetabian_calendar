@@ -17,9 +17,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters.addAll(listOf("x86", "x86_64", "arm64-v8a", "armeabi-v7a"))
+        }
         externalNativeBuild {
             cmake {
-                cppFlags += ""
+                arguments +"-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
             }
         }
     }

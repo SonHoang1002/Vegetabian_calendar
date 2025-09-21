@@ -1,0 +1,364 @@
+{
+  "name": "Solar Event",
+  "data": [
+    
+    {
+      "month": 1,
+      "notes":{
+        "***":"Quốc tế",
+        "**":"Việt Nam",
+        "*":"Nước khác",
+        "": "Nước khác"
+      }, 
+      "days": [
+        {
+          "day": 1,
+          "events": [
+            "***Tết Dương Lịch"
+          ]
+        },
+        {
+          "day": 2,
+          "events": []
+        },
+        {
+          "day": 3,
+          "events": [
+            "**Ngày sinh của Đại thi hào Nguyễn Du"
+          ],
+          "description": [
+            "Ngày 3/1/1766: Ngày sinh Đại thi hào Nguyễn Du. Ông mất ngày 16-9-1820. Nguyễn Du tự Tố Như, hiệu Thanh Hiên, quê ở làng Tiên Điền, huyện Nghi Xuân, tỉnh Hà Tĩnh. Năm 2013, Nguyễn Du được Tổ chức Giáo dục, Khoa học và Văn hóa của Liên hợp quốc (UNESCO) vinh danh là Danh nhân văn hóa thế giới"
+          ]
+        },
+        {
+          "day": 4,
+          "events": [
+            "***Ngày chữ nổi Braille Thế giới"
+          ],
+          "description": [
+            "Ngày Chữ nổi Thế giới là một ngày lễ quốc tế được cử hành vào ngày 4 tháng 1 nhằm tôn vinh nhận thức về tầm quan trọng của chữ nổi như một phương tiện giao tiếp trong việc thực hiện đầy đủ các quyền con người dành cho người mù và người khiếm thị. Đại Hội đồng Liên Hợp Quốc đã chọn ngày tổ chức sự kiện này thông qua một tuyên bố vào tháng 11 năm 2018, và đánh dấu ngày sinh của nhà sáng tạo ra hệ thống chữ nổi Louis Braille. Ngày Chữ nổi Thế giới đầu tiên được tổ chức vào ngày 4 tháng 1 năm 2019"
+          ]
+        },
+        {
+          "day": 5,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 6,
+          "events": [
+            "**Ngầy Tổng tuyển cử đâu tiên của Việt Nam Dân Chủ Cộng Hòa"
+          ],
+          "description": [
+            "6-1-1946: Tổng tuyển cử trong cả nước bầu đại biểu Quốc hội khóa I nước Việt Nam Dân chủ cộng hòa. Đây là một sự kiện quan trọng sau Lễ Tuyên ngôn Độc lập diễn ra vào ngày 2-9-1945 chỉ hơn 4 tháng. Chủ tịch Hồ Chí Minh đã phân tích: Đây là lần đầu tiên người dân Việt Nam được thể hiện quyền làm chủ của mình trong một quốc gia theo chính thể Cộng hòa - Dân chủ."
+          ]
+        },
+        {
+          "day": 7,
+          "events": [
+            "Lật đổ chế độ diệt chủng Pôn Pốt. Nước Cộng Hòa Campuchia và Hội đồng nhân dân Cách mạng Campuchia tuyên bố thành lập.",
+            "Brunei trở thành thành viên thứ sáu gia nhập Hiệp hội các quốc gia Đông Nam Á"
+          ],
+          "description": []
+        },
+        {
+          "day": 8,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 9,
+          "events": [
+            "6.000 người Do Thái bị giết trong một cuộc tàn sát ở Bucharest, Rumania",
+            "Ngày Chủ nhật đẫm máu ở Nga, những người biểu tình đã bị quân của Nga Sa hoàng bắn chết"
+          ],
+          "description": [
+            "1941","1905"
+          ]
+        },
+        {
+          "day": 10,
+          "events": [
+            "Hội Quốc Liên phê chuẩn Hiệp ước Versailles, chính thức kết thúc Thế chiến thứ I với Đức Quốc Xã."
+           ,"Ngày tiếng Hindi Thế giới"
+          ],
+          "description": []
+        },
+        {
+          "day": 11,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 12,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 13,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 14,
+          "events": [
+             "Lễ hội thả diều quốc tế (Uttarayan) - Ấn Độ"
+          ],
+          "description": []
+        },
+        {
+          "day": 15,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 16,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 17,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 18,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 19,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 20,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 21,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 22,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 23,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 24,
+          "events": [
+             "Ngày Quốc tế Giáo dục"
+          ],
+          "description": []
+        },
+        {
+          "day": 25,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 26,
+          "events": [
+             "Ngày Hải quan Quốc tế",
+        "Ngày Năng lượng Sạch Quốc tế"
+          ],
+          "description": []
+        },
+        {
+          "day": 27,
+          "events": [
+              "Ngày Tưởng niệm Nạn nhân Holocaust Quốc tế"
+          ],
+          "description": []
+        },
+        {
+          "day": 28,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 29,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 30,
+          "events": [],
+          "description": []
+        },
+        {
+          "day": 31,
+          "events": [],
+          "description": []
+        }
+      ]
+    },
+    {
+            "month": 2,
+            "days": [
+                {
+                    "day": 1,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 2,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 3,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 4,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 5,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 6,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 7,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 8,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 9,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 10,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 11,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 12,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 13,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 14,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 15,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 16,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 17,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 18,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 19,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 20,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 21,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 22,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 23,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 24,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 25,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 26,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 27,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 28,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 29,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 30,
+                    "events": [],
+                    "description": []
+                },
+                {
+                    "day": 31,
+                    "events": [],
+                    "description": []
+                }
+            ]
+        }
+  ]
+}

@@ -6,8 +6,8 @@ data class MyReason (
 {
     companion object {
         val None = MyReason(reason = "Ngày bình thường")
-        val VegetabianFullMonth = MyReason(reason = "Ngày ăn chay (theo lịch ăn chay hàng tháng đủ )")
-        val VegetabianLackMonth = MyReason(reason = "Ngày ăn chay (theo lịch ăn chay hàng tháng thiếu )")
+        val VegetabianFullMonth = MyReason(reason = "Ngày ăn chay (theo lịch ăn chay hàng tháng (đủ))")
+        val VegetabianLackMonth = MyReason(reason = "Ngày ăn chay (theo lịch ăn chay hàng tháng (thiếu))")
     }
 }
 

@@ -18,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.hts.vegetabiancalendar.factory.MyViewModelFactory
 import com.hts.vegetabiancalendar.route.MyRoute
+import com.hts.vegetabiancalendar.service.MyNotificationService
 import com.hts.vegetabiancalendar.ui.screen.HomeScreen
 import com.hts.vegetabiancalendar.ui.screen.ProfileScreen
 import com.hts.vegetabiancalendar.ui.screen.SettingScreen
@@ -31,25 +32,27 @@ class MainActivity : ComponentActivity() {
         setContent {
             VegetabianCalendarTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    MyNotificationService().requestPermission(this)
                     val context = LocalContext.current
                     val viewModel: MyViewModel = viewModel(
                         factory = MyViewModelFactory(context)
                     )
-                    ScreenMain(innerPadding = innerPadding, viewModel = viewModel)
+                    ScreenMain(innerPadding = innerPadding, viewModel = viewModel, mainActivity= this)
                 }
             }
         }
+
     }
 }
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ScreenMain(innerPadding: PaddingValues, viewModel: MyViewModel) {
+fun ScreenMain(innerPadding: PaddingValues, viewModel: MyViewModel, mainActivity: MainActivity = MainActivity()) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = MyRoute.Home.route) {
         // Home
         composable(MyRoute.Home.route) {
             // pass the navController
-            HomeScreen(navController = navController, viewModel = viewModel,innerPadding = innerPadding)
+            HomeScreen(navController = navController, viewModel = viewModel,innerPadding = innerPadding, mainActivity = mainActivity)
         }
         // Profile
         composable(MyRoute.Profile.route) {

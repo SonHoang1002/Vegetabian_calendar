@@ -59,13 +59,12 @@ fun Instant.toDate(): Date = Date.from(this)
 fun Date.toInstant(): Instant = this.toInstant()
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun LocalDateTime.isVegetabianDayWithSolarLocalDateTime(): Pair<Boolean, MyReason> {
+fun LocalDateTime.checkVegetabianDayWithSolarLocalDateTime(): Pair<Boolean, MyReason> {
     val calendarService = MyCalendarService(this)
     val currentLunarDate: MyLunarDate = calendarService.myLunarDate
 
     val currentLunarDay = currentLunarDate.day
     val currentLunarMonth = currentLunarDate.month
-
 
     when (currentLunarMonth) {
         1 -> {
