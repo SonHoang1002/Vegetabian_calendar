@@ -1,6 +1,7 @@
 package com.hts.vegetabiancalendar.service
 
 import MyCalendarService
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.NotificationChannel
@@ -12,6 +13,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.annotation.RequiresPermission
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -20,11 +22,13 @@ import com.hts.vegetabiancalendar.MainActivity
 import com.hts.vegetabiancalendar.R
 import com.hts.vegetabiancalendar.util.checkVegetabianDayWithSolarLocalDateTime
 import java.time.LocalDateTime
+import java.util.Calendar
 import kotlin.random.Random
 
-@RequiresApi(Build.VERSION_CODES.O)
+
 class MyNotificationService {
     val TAG: String = "MyNotificationService"
+    val hours = listOf(7,8,9,10,11,12,13,14,15,16,17)
 
     fun requestPermission(activity: MainActivity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -138,30 +142,38 @@ class MyNotificationService {
         notificationManager.notify(666, notificationBuilder.build())
     }
 
-    fun scheduleTimerToShowNotification(context: Context, mainActivity: MainActivity) {
+    @SuppressLint("ScheduleExactAlarm")
+    @RequiresPermission(Manifest.permission.SCHEDULE_EXACT_ALARM)
+    fun scheduleTimerToShowNotification(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        val intent = Intent(context, NotificationReceiver::class.java).apply {
-            putExtra("target", "status")
+        for (hour in hours) {
+            val pendingIntent = PendingIntent.getBroadcast(
+                context,
+                hour,
+                Intent(context, NotificationAlarmReceiver::class.java).apply {
+                    putExtra("type", "notification_morning_at_$hour")
+                },
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+            val calendar = Calendar.getInstance().apply {
+                timeInMillis = System.currentTimeMillis()
+                set(Calendar.HOUR_OF_DAY, hour)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+                if (before(Calendar.getInstance())) {
+                    add(Calendar.DATE, 1)
+                }
+            }
+            alarmManager.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                pendingIntent
+            )
         }
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            0,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
 
-        // Mỗi 1 tiếng = 3600000 ms
-        val intervalMillis = 60 * 60 * 1000L
-        val triggerAtMillis = System.currentTimeMillis() + intervalMillis
-
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            triggerAtMillis,
-            intervalMillis,
-            pendingIntent
-        )
-        x
     }
+
 
 }

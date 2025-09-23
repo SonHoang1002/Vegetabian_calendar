@@ -1,5 +1,6 @@
 package com.hts.vegetabiancalendar
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -24,16 +26,22 @@ import com.hts.vegetabiancalendar.ui.screen.ProfileScreen
 import com.hts.vegetabiancalendar.ui.screen.SettingScreen
 import com.hts.vegetabiancalendar.ui.theme.VegetabianCalendarTheme
 import com.hts.vegetabiancalendar.view_model.MyViewModel
-@RequiresApi(Build.VERSION_CODES.O)
 class MainActivity : ComponentActivity() {
+    @SuppressLint("ScheduleExactAlarm")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             VegetabianCalendarTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MyNotificationService().requestPermission(this)
                     val context = LocalContext.current
+                    val activity =this
+                    LaunchedEffect(1) {
+                         val service =   MyNotificationService()
+                        service .requestPermission(activity)
+                        service.scheduleTimerToShowNotification(context )
+
+                    }
                     val viewModel: MyViewModel = viewModel(
                         factory = MyViewModelFactory(context)
                     )

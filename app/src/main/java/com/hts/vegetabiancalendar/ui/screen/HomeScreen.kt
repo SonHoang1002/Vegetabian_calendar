@@ -1,6 +1,7 @@
 package com.hts.vegetabiancalendar.ui.screen
 
 import MyCalendarService
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -19,6 +20,7 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Button
@@ -31,6 +33,8 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
@@ -46,6 +50,11 @@ import com.hts.vegetabiancalendar.model.ModelVerseDhammapada
 import com.hts.vegetabiancalendar.model.MyLunarDate
 import com.hts.vegetabiancalendar.model.MyReason
 import com.hts.vegetabiancalendar.ui.components.BuildAppBar
+import com.hts.vegetabiancalendar.ui.theme.Black
+import com.hts.vegetabiancalendar.ui.theme.GradientBottom
+import com.hts.vegetabiancalendar.ui.theme.GradientTop
+import com.hts.vegetabiancalendar.ui.theme.Gray
+import com.hts.vegetabiancalendar.ui.theme.Yellow
 import com.hts.vegetabiancalendar.util.ConvertUtil
 import com.hts.vegetabiancalendar.util.checkVegetabianDayWithSolarLocalDateTime
 import com.hts.vegetabiancalendar.util.getDescriptionsForText
@@ -66,12 +75,12 @@ fun HomeScreen(
     val localConfig = LocalConfiguration.current
     val screenWidthDp = localConfig.screenWidthDp
     Log.d(TAG, "HomeScreen: $screenWidthDp")
-    val lunarStatusDayData = currentLocalDateTime
-        .checkVegetabianDayWithSolarLocalDateTime()
+    val lunarStatusDayData = currentLocalDateTime.checkVegetabianDayWithSolarLocalDateTime()
+    val gradientBrush = Brush.verticalGradient(colors = listOf(GradientTop, GradientBottom))
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background)
+            .background(brush = gradientBrush)
             .systemBarsPadding()
             .padding(horizontal = 16.dp),
         contentAlignment = Alignment.Center,
@@ -81,11 +90,9 @@ fun HomeScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BuildAppBar(viewModel,mainActivity)
+            BuildAppBar(viewModel, mainActivity)
             Box(
-                modifier = Modifier
-                    .weight(1f),
-                contentAlignment = Alignment.Center
+                modifier = Modifier.weight(1f), contentAlignment = Alignment.Center
             ) {
                 BuildSolarDayOfWeek(viewModel, currentLocalDateTime)
             }
@@ -104,8 +111,7 @@ fun HomeScreen(
                         .background(Color.Gray)
                 )
                 BuildLunar(
-                    currentLocalDateTime,
-                    lunarStatusDayData
+                    currentLocalDateTime, lunarStatusDayData
                 )
             }
 
@@ -114,8 +120,7 @@ fun HomeScreen(
                     .fillMaxSize()
                     .weight(1f)
 //                    .background(Color.Yellow)
-                ,
-                contentAlignment = Alignment.Center
+                , contentAlignment = Alignment.Center
             ) {
                 Text(
                     lunarStatusDayData.second.reason,
@@ -129,8 +134,7 @@ fun HomeScreen(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .weight(3f),
-                contentAlignment = Alignment.Center
+                    .weight(3f), contentAlignment = Alignment.Center
             ) {
                 BuildSampleDhammapadaItem(viewModel)
             }
@@ -139,22 +143,19 @@ fun HomeScreen(
 }
 
 @Composable
-@RequiresApi(Build.VERSION_CODES.O)
 fun BuildSolarDayOfWeek(viewModel: MyViewModel, currentLocalDateTime: LocalDateTime) {
     val currentSolarDayOfWeek =
         ConvertUtil().convertToDayOfWeekValue(currentLocalDateTime.dayOfWeek.value)
 
     BasicText(
-        text = currentSolarDayOfWeek,
-        autoSize = TextAutoSize.StepBased(
+        text = currentSolarDayOfWeek, autoSize = TextAutoSize.StepBased(
             minFontSize = 10.sp,
             maxFontSize = 60.sp,
             stepSize = 5.sp,
-        ),
-        style = TextStyle(
+        ), style = TextStyle(
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.tertiary,
+            color = Black,
         )
     )
 }
@@ -168,42 +169,38 @@ fun BuildSolar(currentLocalDateTime: LocalDateTime) {
         Text(
             "$currentSolarDayOfMonth/$currentSolarMonth",
             fontSize = 60.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold, color = Gray,
         )
         Text(
             "Dương lịch",
             fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold, color = Gray,
         )
     }
 }
 
 @Composable
-@RequiresApi(Build.VERSION_CODES.O)
 fun BuildLunar(localDateTime: LocalDateTime, lunarStatusDayData: Pair<Boolean, MyReason>) {
-    val currentLunarDate: MyLunarDate =
-        MyCalendarService(localDateTime).myLunarDate
+    val currentLunarDate: MyLunarDate = MyCalendarService(localDateTime).myLunarDate
     Column {
         Text(
             "${currentLunarDate.day}/${currentLunarDate.month}",
             fontSize = 60.sp,
             fontWeight = FontWeight.Bold,
-            color = if (lunarStatusDayData.first) Color.Red else Color.Unspecified
+            color = if (lunarStatusDayData.first) Color.Red else Gray,
         )
         Text(
             "Âm lịch",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-
-            )
+            color = Gray,
+        )
     }
 }
 
 @Composable
-@RequiresApi(Build.VERSION_CODES.O)
 fun BuildSampleDhammapadaItem(viewModel: MyViewModel) {
-    val pagerState =
-        remember { mutableIntStateOf(viewModel.currentVerseIndex) }
+    val pagerState = remember { mutableIntStateOf(viewModel.currentVerseIndex) }
     val modelVerseDhammapada: ModelVerseDhammapada? =
         viewModel.getCurrentVerseValue(pagerState.intValue)
     val sampleString: List<String>? = modelVerseDhammapada?.getTextAndOrder()
@@ -220,6 +217,7 @@ fun BuildSampleDhammapadaItem(viewModel: MyViewModel) {
                         pagerState.intValue = pagerState.intValue - 1
                     },
                     modifier = Modifier
+                        .clip(RoundedCornerShape(999.dp))
                         .align(Alignment.CenterStart)
                         .background(color = MaterialTheme.colorScheme.primary)
                 ) {
@@ -237,6 +235,7 @@ fun BuildSampleDhammapadaItem(viewModel: MyViewModel) {
                         pagerState.intValue = pagerState.intValue + 1
                     },
                     modifier = Modifier
+                        .clip(RoundedCornerShape(999.dp))
                         .align(Alignment.CenterEnd)
                         .background(color = MaterialTheme.colorScheme.primary)
                 ) {
@@ -263,7 +262,7 @@ fun BuildSampleDhammapadaItem(viewModel: MyViewModel) {
                         modifier = Modifier.fillMaxWidth(),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Normal,
-                        fontStyle = FontStyle.Italic,
+                        fontStyle = FontStyle.Italic, color = Black,
                     )
                 }
 

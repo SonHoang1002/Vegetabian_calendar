@@ -1,8 +1,11 @@
 package com.hts.vegetabiancalendar.ui.components
 
+import android.graphics.Color
 import android.os.Build
+import android.provider.CalendarContract
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -10,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.Colors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,10 +30,10 @@ import androidx.compose.ui.unit.sp
 import com.hts.vegetabiancalendar.MainActivity
 import com.hts.vegetabiancalendar.R
 import com.hts.vegetabiancalendar.service.MyNotificationService
+import com.hts.vegetabiancalendar.ui.theme.Black
 import com.hts.vegetabiancalendar.view_model.MyViewModel
 
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun BuildAppBar(viewModel: MyViewModel, mainActivity : MainActivity) {
     val height = 51
@@ -51,7 +55,7 @@ fun BuildAppBar(viewModel: MyViewModel, mainActivity : MainActivity) {
                 .width(24.dp).clickable{
                     MyNotificationService().showHeadUpNotification(context = context)
                 },
-            tint = MaterialTheme.colorScheme.onBackground
+            tint = Black
         )
 
         // Title chiếm toàn bộ khoảng giữa
@@ -69,7 +73,7 @@ fun BuildAppBar(viewModel: MyViewModel, mainActivity : MainActivity) {
                     Log.d("MyNotificationService","MyNotificationService search call")
                     MyNotificationService().showStatusNotification(context = context, mainActivity = mainActivity)
              },
-            tint = MaterialTheme.colorScheme.onBackground
+            tint = Black
         )
     }
 }
@@ -86,6 +90,7 @@ fun BuildTitle(modifier: Modifier = Modifier) {
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
+            color = Black
 //            fontFamily = FontFamily(Font(R.font.inknut_antiqua_medium))
         )
     }

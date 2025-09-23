@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.hts.vegetabiancalendar"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -20,6 +20,7 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags += ""
+                arguments += "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
             }
         }
     }
